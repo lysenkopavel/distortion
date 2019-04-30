@@ -59,4 +59,3 @@ set(0,'DefaultTextFontSize',14,'DefaultTextFontName','Times New Roman');
 axis('image')
 
 pause(0.01)
-
