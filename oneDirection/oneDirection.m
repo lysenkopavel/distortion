@@ -12,7 +12,7 @@ function y = oneDirection(beta,xyd,al,a,b,ss,ndata)
         ang = al(j);
         s=ss(j);
         
-        clear xd yd
+        clear xd yd input xn yn
         
         M = [cos(ang) -sin(ang); sin(ang) cos(ang)];
         xd(1:s) = xyd(1,indx_end:indx_end+s-1);
@@ -29,7 +29,7 @@ function y = oneDirection(beta,xyd,al,a,b,ss,ndata)
         end
 
         input = [s; N];
-        input(1:2, 2:(s+1)) = [yn; xn];
+        input(1:2, 2:s+1) = [yn; xn];
 
         xncorrect = modelfunXnew(a,input);
         yncorrect = modelfunYnew(b,input);
