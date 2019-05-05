@@ -25,20 +25,22 @@ input(1:2, 2:(s+1)) = [yd; xd];
 betaX=nlinfit(input,xt,@(beta,x)modelfunXnew(beta,x),beta0);
 betaY=nlinfit(input,yt,@(beta,x)modelfunYnew(beta,x),beta0);
 
-set(0,'DefaultAxesFontSize',14,'DefaultAxesFontName','Times New Roman');
-set(0,'DefaultTextFontSize',14,'DefaultTextFontName','Times New Roman'); 
-%colormap gray
-hold on;
-plot(xd, yd, 'ro', 'MarkerSize', 6);
-plot(xt, yt, 'k+', 'MarkerSize', 6);
-axis('image')
-%axis([200 512 0 512])
-
-hold on;
 xcorrect = modelfunXnew(betaX,input);
 ycorrect = modelfunYnew(betaY,input);
-plot(xcorrect, ycorrect, 'b*',  'MarkerSize', 6);
+
+plot(xd, yd, 'bo', 'MarkerSize', 8);
 hold on;
+plot(xcorrect, ycorrect, 'r*',  'MarkerSize', 8);
+plot(xt, yt, 'k+', 'MarkerSize', 14);
+hold on;
+
+lgd = legend({'distortion','calculated','correct'},'Location','bestoutside', 'FontSize',18);
+legend('boxoff')
+title(lgd,'Data')
+axis('image')
+axis([0 310 0 512])
+set(0,'DefaultAxesFontSize',18,'DefaultAxesFontName','Times New Roman');
+set(0,'DefaultTextFontSize',18,'DefaultTextFontName','Times New Roman'); 
 
 pause(0.01)
 

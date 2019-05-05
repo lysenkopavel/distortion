@@ -14,8 +14,16 @@ for j=1:1:length(z)
             xd(s) = xdist;
             xt(s) = xtrue;
             yt(s) = ytrue;
+            
+            plot(xd(s), yd(s), 'ro')
+            hold on;
+            plot(xt(s), yt(s), 'k+')
+            pause(1)
+            
         end
     end
+    
+    figure;
     
     xyt(1,indx_end:indx_end+s-1) = xt;
     xyt(1,indx_end+s:indx_end+2*s-1) = yt;
@@ -28,6 +36,8 @@ for j=1:1:length(z)
     
     clear xt yt xd yd
 end
+
+figure
 
 ndata = [N 512 length(z)];
 

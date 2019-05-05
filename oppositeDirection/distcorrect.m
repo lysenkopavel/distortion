@@ -1,5 +1,7 @@
 clear all
+
 choosefile
+
 load(['mass_image_centers' '_' result_name]);
 sz=size(A);
 numObj = sz(3);
@@ -8,11 +10,6 @@ data = fitsread(name,'Table');
 
 angle = data{3};
 ansz = size(angle);
-for j =1:1:ansz(1)
-    if angle(j)>180
-        angle(j) = angle(j)-360;
-    end
-end
 angle = angle.*pi/180;
 
 N=2;

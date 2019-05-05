@@ -3,6 +3,10 @@ choosefile
 load(result_name)
 sz=size(result);
 
+data = fitsread(name,'Table');
+dsz=size(data{3});
+dsz=dsz(1);
+
 bw = (result(:,:,1)>0);
 CC = bwconncomp(bw,8);
 
@@ -42,20 +46,20 @@ for i=1:1:CC.NumObjects
             if left<1, left = 1; end
             if right>sz(2), right = sz(2); end 
 
-            show_img(top:bottom, left:right) = n.*3;
+            show_img(top:bottom, left:right) = data{3}(n);
            
         end
         
     end
-    
-    %plot(A(:,2,i), A(:,1,i), '*');
-    %hold on;
+    %{
+    plot(A(:,2,i), A(:,1,i), '*');
+    hold on;
+    pause(1)
+    %}
     
 end
-%axis('image')
-%axis([0 300 0 512])
 
-%figure
+figure
 imagesc(show_img);
 axis xy;
 colormap jet
@@ -63,6 +67,8 @@ c = colorbar;
 c.Label.String = 'Угол поворота призм';
 c.Label.FontSize = 18;
 axis('image')
+set(0,'DefaultAxesFontSize',20,'DefaultAxesFontName','Times New Roman');
+set(0,'DefaultTextFontSize',20,'DefaultTextFontName','Times New Roman');
 %axis([200 520 0 520])
 axis([0 300 0 512])
 

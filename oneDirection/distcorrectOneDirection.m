@@ -25,11 +25,6 @@ data = fitsread(name,'Table');
 
 angle = data{3};
 ansz = size(angle);
-for j =1:1:ansz(1)
-    if angle(j)>180
-        angle(j) = angle(j)-360;
-    end
-end
 angle = angle.*pi/180;
 
 N=2;
@@ -67,7 +62,7 @@ numObj = k;
 %plot(squeeze(oppositeDirection(1,2,:)), squeeze(oppositeDirection(1,1,:)), 'k+', 'MarkerSize', 10);
 
 %
-z=[1 10 16 20 100];
+z=[70];
 for i = 1:1:length(z)
     dang(i) = angle(16) - angle(z(i));
 end
