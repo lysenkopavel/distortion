@@ -6,12 +6,20 @@ for k = 1:1:numObj
     xtrue = A(1,2,k);
     ytrue = A(1,1,k);
     %if ydist~=0 && xdist~=0 && xdist<497 && ydist>15 && ydist<497
-    if ydist~=0 && xdist~=0 && xdist>15 && ydist>15 && ydist<497
+    if ydist~=0 && xdist~=0 && xdist>17 && xdist<290 && ydist>15 && ydist<497
         s = s+1;
         yd(s) = ydist;
         xd(s) = xdist;
         xt(s) = xtrue;
         yt(s) = ytrue;
+        
+        %{
+        plot(xdist,ydist,'bo');
+        hold on
+        plot(xtrue,ytrue,'k+');
+        pause(1)
+        %}
+        
     end
 end
 
@@ -28,12 +36,20 @@ betaY=nlinfit(input,yt,@(beta,x)modelfunYnew(beta,x),beta0);
 xcorrect = modelfunXnew(betaX,input);
 ycorrect = modelfunYnew(betaY,input);
 
-plot(xd, yd, 'bo', 'MarkerSize', 8);
+plot(xd, yd, 'bo', 'MarkerSize', 4);
 hold on;
-plot(xcorrect, ycorrect, 'r*',  'MarkerSize', 8);
+plot(xcorrect, ycorrect, 'r*',  'MarkerSize', 4);
 plot(xt, yt, 'k+', 'MarkerSize', 14);
-hold on;
 
+%{
+hold off;
+axis('image')
+axis([0 310 0 512])
+title(sprintf('%d',n))
+pause(1)
+%}
+
+%{
 lgd = legend({'distortion','calculated','correct'},'Location','bestoutside', 'FontSize',18);
 legend('boxoff')
 title(lgd,'Data')
@@ -41,7 +57,7 @@ axis('image')
 axis([0 310 0 512])
 set(0,'DefaultAxesFontSize',18,'DefaultAxesFontName','Times New Roman');
 set(0,'DefaultTextFontSize',18,'DefaultTextFontName','Times New Roman'); 
-
 pause(0.01)
+%}
 
 end

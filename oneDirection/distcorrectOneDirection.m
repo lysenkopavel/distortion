@@ -6,12 +6,12 @@ opposite_name = [id 'OppositeDirection' filter '.mat'];
 load(['mass_image_centers_' opposite_name])
 oppositeDirection = A;
 clear A
-%{
+%
 load(['harmonicY_' opposite_name]);
 load(['harmonicX_' opposite_name]);
 [a, b] = get_ab(135, harmonicX, harmonicY);
 %}
-%
+%{
 load('a_135_625.mat')
 load('b_135_625.mat')
 %}
@@ -62,7 +62,7 @@ numObj = k;
 %plot(squeeze(oppositeDirection(1,2,:)), squeeze(oppositeDirection(1,1,:)), 'k+', 'MarkerSize', 10);
 
 %
-z=[70];
+z=[91 106 121 16 31 46 61 73];
 for i = 1:1:length(z)
     dang(i) = angle(16) - angle(z(i));
 end

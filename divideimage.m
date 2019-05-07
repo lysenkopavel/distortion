@@ -6,7 +6,7 @@ function [ A ] = divideimage(CC, frm, bw, A, typeresult)
         mask(CC.PixelIdxList{i}) = bw(CC.PixelIdxList{i});
         image = frm.*mask;
         
-        ph = [50 40 30 20 10 5 2 1.8 1.6 1.5 1.4 1.3 1.2];
+        ph = [30 20 10 5 2 1.8 1.6 1.5 1.4 1.3 1.2];
         sizeph = size(ph);
         j = 1;
         pnew = ph(j);
@@ -33,7 +33,13 @@ function [ A ] = divideimage(CC, frm, bw, A, typeresult)
                     [n k] = meshgrid(1:sz(1),1:sz(2));
                     center_of_mass_x = sum(n(1,:).*x)/mass;
                     center_of_mass_y = sum(k(:,1).*y)/mass;
-
+                    
+                    sza = size(A);
+                    w = sza(1)+1;
+                    A(w,1) = center_of_mass_x;
+                    A(w,2) = center_of_mass_y;
+                    
+                    %{
                     cy = round(center_of_mass_y);
                     cx = round(center_of_mass_x);
                     l = 0;
@@ -47,6 +53,7 @@ function [ A ] = divideimage(CC, frm, bw, A, typeresult)
                     if right>sz(2), right = sz(2); end 
 
                     A(top:bottom, left:right) = mass;
+                    %}
                 end
             end
         end

@@ -8,22 +8,24 @@ for j=1:1:length(z)
         xdist = xdd(n,k);
         xtrue = xtrue_opposite(k);
         ytrue = ytrue_opposite(k);
-        if ydist~=0 && xdist~=0 && xdist>15 && ydist>15 && ydist<497
+        if ydist~=0 && xdist~=0 && xdist>17 && xdist<290 && ydist>15 && ydist<497
             s = s+1;
             yd(s) = ydist;
             xd(s) = xdist;
             xt(s) = xtrue;
             yt(s) = ytrue;
             
+            %{
             plot(xd(s), yd(s), 'ro')
             hold on;
             plot(xt(s), yt(s), 'k+')
             pause(1)
+            %}
             
         end
     end
     
-    figure;
+    %figure;
     
     xyt(1,indx_end:indx_end+s-1) = xt;
     xyt(1,indx_end+s:indx_end+2*s-1) = yt;
@@ -42,6 +44,7 @@ figure
 ndata = [N 512 length(z)];
 
 beta = [112 218];
+beta(3:2+2*length(z))=0;
 
 %
 [beta,R,J,CovB,MSE,ErrorModelInfo]=nlinfit(xyd,xyt,@(beta,xyd)oneDirection(beta,xyd,dang,a,b,ss,ndata),beta);
@@ -49,7 +52,7 @@ ci = nlparci(beta, R, 'jacobian', J);
 %}
 correct = oneDirection(beta,xyd,dang,a,b,ss,ndata);
 
-colour = ['r' 'b' 'g' 'm' 'k'];
+colour = ['r' 'b' 'g' 'm' 'k' 'y' 'c' 'r'];
 hold on;
 indx_end = 1;
 dx = 0;

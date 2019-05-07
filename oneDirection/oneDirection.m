@@ -12,6 +12,9 @@ function y = oneDirection(beta,xyd,al,a,b,ss,ndata)
         ang = al(j);
         s=ss(j);
         
+        dx = beta(2+j);
+        dy = beta(2+length_z+j);
+        
         clear xd yd input xn yn
         
         M = [cos(ang) -sin(ang); sin(ang) cos(ang)];
@@ -38,8 +41,8 @@ function y = oneDirection(beta,xyd,al,a,b,ss,ndata)
 
                 XYn = [xncorrect(k)-xc; yncorrect(k)-yc];
                 XY=M\XYn;
-                y(1,indx_end+k-1) = XY(1) + xc;
-                y(1,indx_end+k-1+s) = XY(2) + yc;
+                y(1,indx_end+k-1) = XY(1) + xc + dx;
+                y(1,indx_end+k-1+s) = XY(2) + yc + dy;
 
         end
         

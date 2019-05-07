@@ -56,7 +56,7 @@ name = 'newFrames/SP20190324164201.fits';
 %{
 filter = '625';
 direction = 'OneDirection';
-id = 'new';
+id = 'new2';
 result_name = [id direction filter '.mat'];
 name = 'newFrames/SP20190324165348.fits';
 %}
@@ -73,7 +73,7 @@ name = 'newFrames/SP20190324174618.fits';
 %
 filter = '625';
 direction = 'OppositeDirection';
-id = 'new';
+id = 'new2';
 result_name = [id direction filter '.mat'];
 name = 'newFrames/SP20190324181155.fits';
 %}
