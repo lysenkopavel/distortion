@@ -50,8 +50,11 @@ for i=1:1:numObj
                 if left<1, left = 1; end
                 if right>szz, right = szz; end 
 
-                show_img(top:bottom, left:right) = data{3}(n);
-                
+                %d = (data{3}(n) - (180 - data{3}(n))); label = 'Угол между призмами'; %phi for oppositeDirection
+                d = (data{3}(n) + (data{3}(n)-90))/2; label = 'Средний угол поворота призм'; %gamma for oneDirection
+                if d<=0; d = 360+d; end
+                show_img(top:bottom, left:right) = d; 
+               
                 break;
             end
         end
@@ -70,10 +73,18 @@ figure
 imagesc(show_img);
 axis xy;
 colormap jet
+
+cmap = jet(max(show_img(:)));
+cmap(1:2,:) = zeros(2,3);
+colormap(cmap);
+
 c = colorbar;
-c.Label.String = 'Угол поворота призм';
+c.Label.String = label;
 c.Label.FontSize = 18;
 axis('image')
+
+
+
 set(0,'DefaultAxesFontSize',20,'DefaultAxesFontName','Times New Roman');
 set(0,'DefaultTextFontSize',20,'DefaultTextFontName','Times New Roman');
 %axis([200 520 0 520])

@@ -9,7 +9,8 @@ clear A
 %
 load(['harmonicY_' opposite_name]);
 load(['harmonicX_' opposite_name]);
-[a, b] = get_ab(135, harmonicX, harmonicY);
+phi = (135-45)/2;
+[a, b] = get_ab(phi, harmonicX, harmonicY);
 %}
 %{
 load('a_135_625.mat')

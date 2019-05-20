@@ -6,7 +6,8 @@ function [ A ] = divideimage(CC, frm, bw, A, typeresult)
         mask(CC.PixelIdxList{i}) = bw(CC.PixelIdxList{i});
         image = frm.*mask;
         
-        ph = [30 20 10 5 2 1.8 1.6 1.5 1.4 1.3 1.2];
+        %1.4 1.3 1.2
+        ph = [40 30 20 10 5 2 1.8 1.6 1.5];
         sizeph = size(ph);
         j = 1;
         pnew = ph(j);

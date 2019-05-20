@@ -29,8 +29,8 @@ for m=mstart:mend
         frm=frm./frmnum;  
         %frm(:,1:200) = 0;
         frm(:,300:512) = 0;
-        frm = imgaussfilt(frm, 2);
-        bw = (frm>max(max(frm))/40);
+        frm = imgaussfilt(frm, 4);
+        bw = (frm>max(max(frm))/2000);
         CC = bwconncomp(bw,8);
         %A=zeros(sz(1),sz(2));
         A = [];
@@ -48,8 +48,10 @@ for m=mstart:mend
         %imagesc(A)
         %caxis ([100,1000])
         plot(A(:,1),A(:,2),'bo')
-        axis([0 310 0 512])
-        axis('image')
+        xlim([1 310])
+        ylim([1 512])
+        %axis([1 310 1 512])
+        %axis('image')
         
         pause(0.1)
         frm=zeros(sz(1),sz(2));

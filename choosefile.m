@@ -53,7 +53,7 @@ name = 'testframes/myframes/SP20180508131400.fits';
 result_name = 'newOneDirection550.mat';
 name = 'newFrames/SP20190324164201.fits';
 %}
-%{
+%
 filter = '625';
 direction = 'OneDirection';
 id = 'new2';
@@ -70,7 +70,7 @@ name = 'newFrames/SP20190324172254.fits';
 result_name = 'newOppositeDirection880.mat';
 name = 'newFrames/SP20190324174618.fits';
 %}
-%
+%{
 filter = '625';
 direction = 'OppositeDirection';
 id = 'new2';

@@ -37,65 +37,66 @@ set(0,'DefaultTextFontSize',18,'DefaultTextFontName','Times New Roman');
 pause(0.01)
 
 
-figure;
-l = 1;
-harmonicX(1:N,1:N) = struct('betax',0);
-fprintf('\\begin{table}[!ht]\n')
+%figure;
+%l = 1;
+harmonicX(1:N,1:N) = struct('beta',0,'ci',0,'angle',0,'data',0);
 for i=1:1:N
     for j = 1:1:N
-        subplot(N,N,l)
+        
         x(:) = bX(i,j,:);
         [beta,R,J]=nlinfit(angle,x',@(beta,x)harmonic_function(beta,x),[1 1 1 1 1 0 0 0 0]);
         ci = nlparci(beta, R, 'jacobian', J);
+        harmonicX(i,j) = struct('beta',beta,'ci',ci,'angle',angle,'data',x);
         
-        harmonicX(i,j) = struct('betax',beta);
-        
-        generate_latex_table(beta,ci,'A',i,j)
-        
+        %{
+        subplot(N,N,l)
         plot(angle.*(180/pi),x,'bo');
         hold on
         plot(angle.*(180/pi),harmonic_function(beta,angle),'r*');
-        title(sprintf('A_{%d%d}', i,j))
         xlabel('angle [deg]','FontSize',14)
         xlim([0 360])
+        ylabel(sprintf('A_{%d%d}', i,j),'FontSize',14)
         lgd = legend({'calculated','approximated'},'Location','best', 'FontSize',12);
         legend('boxon')
         title(lgd,'distortion coefficient')
-        
         l=l+1;
+        %}
+        
     end
 end
-fprintf('\\end{table}\n\n')
 
-figure;
-l = 1;
-harmonicY(1:N,1:N) = struct('betay',0);
-fprintf('\\begin{table}[!ht]\n')
+%figure;
+%l = 1;
+harmonicY(1:N,1:N) = struct('beta',0,'ci',0,'angle',0,'data',0);
 for i=1:1:N
     for j = 1:1:N
-        subplot(N,N,l)
         y(:) = bY(i,j,:);
         [beta,R,J]=nlinfit(angle,y',@(beta,x)harmonic_function(beta,x),[1 1 1 1 1 0 0 0 0]);
         ci = nlparci(beta, R, 'jacobian', J);
+        harmonicY(i,j) = struct('beta',beta,'ci',ci,'angle',angle,'data',y);
         
-        harmonicY(i,j) = struct('betay',beta);
-        
-        generate_latex_table(beta,ci,'B',i,j)
-        
+        %{
+        subplot(N,N,l)
         plot(angle.*(180/pi),y,'bo');
         hold on
         plot(angle.*(180/pi),harmonic_function(beta,angle),'r*');
         title(sprintf('B_{%d%d}', i,j))
         xlabel('angle [deg]','FontSize',14)
         xlim([0 360])
+        ylabel(sprintf('B_{%d%d}', i,j),'FontSize',14)
         lgd = legend({'calculated','approximated'},'Location','best', 'FontSize',12);
         legend('boxon')
         title(lgd,'distortion coefficient')
-        
         l = l+1;
+        %}
+        
     end
 end
-fprintf('\\end{table}\n\n')
 
 save(['harmonicX' '_' result_name], 'harmonicX');
 save(['harmonicY' '_' result_name], 'harmonicY');
+
+
+create_latex_table(harmonicX,'A');
+create_latex_table(harmonicY,'B');
+plot_super_plot;
